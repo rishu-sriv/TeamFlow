@@ -22,8 +22,10 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
     setLoading(true)
     try {
       const payload = {
-        ...form,
+        title: form.title,
+        description: form.description || undefined,
         assignee_id: form.assignee_id || undefined,
+        priority: form.priority,
         due_date: form.due_date || undefined,
       }
       const res = await api.post(`/tasks/project/${projectId}`, payload)
@@ -138,8 +140,8 @@ export default function ProjectBoard() {
           api.get(`/tasks/project/${id}`),
         ])
         setCurrentProject(projRes.data.project)
-        setMembers(projRes.data.members)
-        setTasks(tasksRes.data.tasks)
+        setMembers(projRes.data.members || [])
+        setTasks(tasksRes.data.tasks || [])
       } catch (err) {
         toast.error('Failed to load project')
         navigate('/projects')
@@ -281,7 +283,9 @@ export default function ProjectBoard() {
       {/* Kanban board */}
       <div className="flex-1 overflow-x-auto p-6">
         <KanbanBoard
+          tasks={filteredTasks}
           onTaskClick={(task) => setSelectedTask(task)}
+          projectRole={projectRole}
         />
       </div>
 

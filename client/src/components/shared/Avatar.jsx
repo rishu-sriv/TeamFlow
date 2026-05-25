@@ -1,6 +1,9 @@
 import { getInitials } from '../../lib/utils'
 
-export default function Avatar({ name = '', color = '#6366f1', size = 'md', className = '' }) {
+// Accepts either `user` object or individual `name`/`color` props
+export default function Avatar({ user, name = '', color = '#6366f1', size = 'md', className = '' }) {
+  const resolvedName  = user?.name  || name
+  const resolvedColor = user?.avatar_color || color
   const sizes = {
     xs: 'w-6 h-6 text-xs',
     sm: 'w-8 h-8 text-xs',
@@ -11,11 +14,11 @@ export default function Avatar({ name = '', color = '#6366f1', size = 'md', clas
 
   return (
     <div
-      className={`${sizes[size] || sizes.md} rounded-full flex items-center justify-center font-semibold text-white shrink-0 ${className}`}
-      style={{ backgroundColor: color }}
-      title={name}
+      className={`${sizes[size] || sizes.md} rounded-full flex items-center justify-center font-semibold text-white shrink-0 shadow-sm ${className}`}
+      style={{ backgroundColor: resolvedColor }}
+      title={resolvedName}
     >
-      {getInitials(name)}
+      {getInitials(resolvedName)}
     </div>
   )
 }

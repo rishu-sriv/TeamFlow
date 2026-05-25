@@ -24,11 +24,23 @@ const updateStatusSchema = z.object({
 })
 
 const isProjectMember = async (projectId, userId) => {
+  // Check explicit project membership first
   const result = await db.query(
     'SELECT role FROM project_members WHERE project_id = $1 AND user_id = $2',
     [projectId, userId]
   )
-  return result.rows[0] || null
+  if (result.rows[0]) return result.rows[0]
+
+  // Fall back: check if user is a member of the same team as the project
+  const teamCheck = await db.query(
+    `SELECT 1 FROM projects p
+     JOIN users u ON u.team_id = p.team_id
+     WHERE p.id = $1 AND u.id = $2`,
+    [projectId, userId]
+  )
+  if (teamCheck.rows.length > 0) return { role: 'member' }
+
+  return null
 }
 
 export const getTasksByProject = async (req, res, next) => {
@@ -45,9 +57,11 @@ export const getTasksByProject = async (req, res, next) => {
       SELECT t.*,
         u.name as assignee_name,
         u.avatar_color as assignee_avatar_color,
-        u.email as assignee_email
+        u.email as assignee_email,
+        cb.name as created_by_name
       FROM tasks t
       LEFT JOIN users u ON u.id = t.assignee_id
+      LEFT JOIN users cb ON cb.id = t.created_by
       WHERE t.project_id = $1
     `
     const params = [projectId]
@@ -108,23 +122,17 @@ export const createTask = async (req, res, next) => {
 
     const task = result.rows[0]
 
-    // Get assignee info if assigned
-    let taskWithAssignee = task
-    if (task.assignee_id) {
-      const assigneeResult = await db.query(
-        'SELECT name, email, avatar_color FROM users WHERE id = $1',
-        [task.assignee_id]
-      )
-      if (assigneeResult.rows.length > 0) {
-        const a = assigneeResult.rows[0]
-        taskWithAssignee = {
-          ...task,
-          assignee_name: a.name,
-          assignee_email: a.email,
-          assignee_avatar_color: a.avatar_color,
-        }
-      }
-    }
+    // Re-fetch with joined user info
+    const fullResult = await db.query(
+      `SELECT t.*, u.name as assignee_name, u.avatar_color as assignee_avatar_color, u.email as assignee_email,
+        cb.name as created_by_name
+       FROM tasks t
+       LEFT JOIN users u ON u.id = t.assignee_id
+       LEFT JOIN users cb ON cb.id = t.created_by
+       WHERE t.id = $1`,
+      [task.id]
+    )
+    const taskWithAssignee = fullResult.rows[0] || task
 
     await logActivity(projectId, req.user.id, 'task_created', 'task', task.id, { title: task.title })
 
@@ -245,9 +253,11 @@ export const updateTask = async (req, res, next) => {
 
     // Get with assignee info
     const finalResult = await db.query(
-      `SELECT t.*, u.name as assignee_name, u.avatar_color as assignee_avatar_color, u.email as assignee_email
+      `SELECT t.*, u.name as assignee_name, u.avatar_color as assignee_avatar_color, u.email as assignee_email,
+        cb.name as created_by_name
        FROM tasks t
        LEFT JOIN users u ON u.id = t.assignee_id
+       LEFT JOIN users cb ON cb.id = t.created_by
        WHERE t.id = $1`,
       [id]
     )
