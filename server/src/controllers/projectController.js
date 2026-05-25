@@ -24,17 +24,18 @@ export const getAllProjects = async (req, res, next) => {
   try {
     const result = await db.query(
       `SELECT p.*,
-        pm.role as user_role,
+        COALESCE(pm.role, 'member') as user_role,
         COUNT(DISTINCT pm2.user_id) as member_count,
         COUNT(DISTINCT t.id) as task_count,
         COUNT(DISTINCT CASE WHEN t.status = 'done' THEN t.id END) as done_count
       FROM projects p
-      JOIN project_members pm ON pm.project_id = p.id AND pm.user_id = $1
+      LEFT JOIN project_members pm ON pm.project_id = p.id AND pm.user_id = $1
       LEFT JOIN project_members pm2 ON pm2.project_id = p.id
       LEFT JOIN tasks t ON t.project_id = p.id
+      WHERE p.team_id = $2
       GROUP BY p.id, pm.role
       ORDER BY p.created_at DESC`,
-      [req.user.id]
+      [req.user.id, req.user.team_id]
     )
 
     return res.json({ projects: result.rows })
@@ -52,19 +53,37 @@ export const createProject = async (req, res, next) => {
       await client.query('BEGIN')
 
       const projectResult = await client.query(
-        `INSERT INTO projects (name, description, owner_id)
-         VALUES ($1, $2, $3)
+        `INSERT INTO projects (name, description, owner_id, team_id)
+         VALUES ($1, $2, $3, $4)
          RETURNING *`,
-        [name, description, req.user.id]
+        [name, description, req.user.id, req.user.team_id]
       )
 
       const project = projectResult.rows[0]
 
+      // Add creator as project admin
       await client.query(
         `INSERT INTO project_members (project_id, user_id, role)
-         VALUES ($1, $2, 'admin')`,
+         VALUES ($1, $2, 'admin')
+         ON CONFLICT (project_id, user_id) DO NOTHING`,
         [project.id, req.user.id]
       )
+
+      // Auto-add all team admins as project admins (if not already added)
+      if (req.user.team_id) {
+        const admins = await client.query(
+          `SELECT id FROM users WHERE team_id = $1 AND is_team_admin = TRUE AND id != $2`,
+          [req.user.team_id, req.user.id]
+        )
+        for (const admin of admins.rows) {
+          await client.query(
+            `INSERT INTO project_members (project_id, user_id, role)
+             VALUES ($1, $2, 'admin')
+             ON CONFLICT (project_id, user_id) DO NOTHING`,
+            [project.id, admin.id]
+          )
+        }
+      }
 
       await client.query('COMMIT')
 
@@ -92,10 +111,13 @@ export const getProject = async (req, res, next) => {
     const { id } = req.params
 
     const projectResult = await db.query(
-      `SELECT p.*, pm.role as user_role
+      `SELECT p.*, COALESCE(pm.role, 'member') as user_role
        FROM projects p
-       JOIN project_members pm ON pm.project_id = p.id AND pm.user_id = $2
-       WHERE p.id = $1`,
+       LEFT JOIN project_members pm ON pm.project_id = p.id AND pm.user_id = $2
+       WHERE p.id = $1
+         AND EXISTS (
+           SELECT 1 FROM users u WHERE u.id = $2 AND u.team_id = p.team_id
+         )`,
       [id, req.user.id]
     )
 
@@ -104,11 +126,13 @@ export const getProject = async (req, res, next) => {
     }
 
     const membersResult = await db.query(
-      `SELECT pm.*, u.name, u.email, u.avatar_color
-       FROM project_members pm
-       JOIN users u ON u.id = pm.user_id
-       WHERE pm.project_id = $1
-       ORDER BY pm.joined_at ASC`,
+      `SELECT u.id as user_id, u.name, u.email, u.avatar_color,
+        COALESCE(pm.role, 'member') as role,
+        pm.joined_at
+       FROM users u
+       JOIN projects p ON p.team_id = u.team_id AND p.id = $1
+       LEFT JOIN project_members pm ON pm.project_id = $1 AND pm.user_id = u.id
+       ORDER BY CASE WHEN pm.role = 'admin' THEN 0 ELSE 1 END, u.name ASC`,
       [id]
     )
 
@@ -179,12 +203,20 @@ export const addMember = async (req, res, next) => {
     const { id } = req.params
     const { email } = addMemberSchema.parse(req.body)
 
-    const userResult = await db.query('SELECT id, name, email, avatar_color FROM users WHERE email = $1', [email])
+    const userResult = await db.query(
+      'SELECT id, name, email, avatar_color, team_id FROM users WHERE email = $1',
+      [email]
+    )
     if (userResult.rows.length === 0) {
-      return res.status(404).json({ error: 'User not found' })
+      return res.status(404).json({ error: 'No user found with that email' })
     }
 
     const user = userResult.rows[0]
+
+    // Team isolation — only add members from the same team
+    if (user.team_id !== req.user.team_id) {
+      return res.status(403).json({ error: 'This user is not part of your team' })
+    }
 
     const existing = await db.query(
       'SELECT 1 FROM project_members WHERE project_id = $1 AND user_id = $2',

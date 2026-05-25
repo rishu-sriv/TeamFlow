@@ -41,7 +41,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex">
       {/* Left panel */}
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-primary-600 via-primary-500 to-violet-600 flex-col justify-between p-12 text-white">
+      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-primary-600 via-primary-500 to-violet-600 flex-col p-12 text-white">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
             <span className="font-extrabold text-xl">T</span>
@@ -49,7 +49,7 @@ export default function Login() {
           <span className="font-extrabold text-2xl">TeamFlow</span>
         </div>
 
-        <div>
+        <div className="flex-1 flex flex-col justify-center">
           <h1 className="text-4xl font-extrabold mb-4 leading-tight">
             Ship faster,<br />together.
           </h1>
@@ -66,14 +66,6 @@ export default function Login() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
-          {[['500+', 'Teams'], ['50K+', 'Tasks Done'], ['99.9%', 'Uptime']].map(([num, label]) => (
-            <div key={label} className="bg-white/10 rounded-2xl p-4 text-center backdrop-blur-sm">
-              <p className="text-2xl font-extrabold">{num}</p>
-              <p className="text-white/70 text-xs mt-0.5">{label}</p>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Right form */}
@@ -152,13 +144,6 @@ export default function Login() {
             </Link>
           </p>
 
-          <div className="mt-8 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl">
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2">Demo accounts</p>
-            <div className="space-y-1 font-mono text-xs text-slate-600 dark:text-slate-300">
-              <p>admin@teamflow.com / Admin@123</p>
-              <p>member@teamflow.com / Member@123</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

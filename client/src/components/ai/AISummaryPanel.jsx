@@ -121,9 +121,9 @@ export default function AISummaryPanel({ projectId, isOpen, onClose }) {
                     {data.stats.overdue} overdue
                   </span>
                 )}
-                {data.stats?.totalTasks !== undefined && (
+                {data.stats?.total !== undefined && (
                   <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-                    {data.stats.totalTasks} tasks total
+                    {data.stats.total} tasks total
                   </span>
                 )}
               </div>

@@ -1,40 +1,33 @@
 import axios from 'axios'
-import { mockAdapter } from './mock/adapter.js'
-
-const MOCK_MODE = import.meta.env.VITE_MOCK_MODE === 'true'
 
 const api = axios.create({
-  baseURL: MOCK_MODE
-    ? '/api/v1'
-    : (import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/v1` : '/api/v1'),
+  baseURL: import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL}/api/v1`
+    : '/api/v1',
   headers: { 'Content-Type': 'application/json' },
-  ...(MOCK_MODE ? { adapter: mockAdapter } : { withCredentials: true }),
+  withCredentials: true,
 })
 
-// Attach token to every request
+// Attach JWT token to every request
 api.interceptors.request.use(
   (config) => {
-    const stored = localStorage.getItem('teamflow-auth')
-    if (stored) {
-      try {
+    try {
+      const stored = localStorage.getItem('teamflow-auth')
+      if (stored) {
         const { state } = JSON.parse(stored)
-        if (state?.token) {
-          config.headers.Authorization = `Bearer ${state.token}`
-        }
-      } catch {
-        // ignore parse error
+        if (state?.token) config.headers.Authorization = `Bearer ${state.token}`
       }
-    }
+    } catch { /* ignore */ }
     return config
   },
   (err) => Promise.reject(err)
 )
 
-// Handle 401 globally (skip in mock mode — tokens are always valid)
+// Handle 401 globally — clear session and redirect to login
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (!MOCK_MODE && err.response?.status === 401) {
+    if (err.response?.status === 401) {
       localStorage.removeItem('teamflow-auth')
       window.location.href = '/login'
     }
