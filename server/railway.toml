@@ -1,0 +1,7 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "node src/runMigrations.js && npm start"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
