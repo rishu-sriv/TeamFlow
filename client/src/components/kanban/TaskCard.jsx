@@ -40,10 +40,10 @@ export default function TaskCard({ task, onClick }) {
       {...attributes}
       {...listeners}
       onClick={onClick}
-      className={`bg-white dark:bg-slate-800 rounded-xl p-3.5 cursor-pointer transition-all select-none group ${
+      className={`bg-white dark:bg-jet-elevated rounded-xl p-3.5 cursor-pointer transition-all select-none group ${
         task.is_overdue
           ? 'border-l-4 border-l-red-400 border border-red-100 dark:border-red-900 shadow-sm hover:shadow-md'
-          : 'border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-slate-200 dark:hover:border-slate-600'
+          : 'border border-slate-100 dark:border-jet-border shadow-sm hover:shadow-md hover:border-slate-200 dark:hover:border-slate-600'
       } ${isDragging ? 'shadow-2xl rotate-2 z-50 scale-105' : ''}`}
     >
       {/* Overdue banner */}
@@ -73,7 +73,7 @@ export default function TaskCard({ task, onClick }) {
       </div>
 
       {/* Assignee + Created by */}
-      <div className="border-t border-slate-100 dark:border-slate-700 pt-2 space-y-1.5">
+      <div className="border-t border-slate-100 dark:border-jet-border pt-2 space-y-1.5">
         {task.assignee_name ? (
           <UserPill name={task.assignee_name} color={task.assignee_avatar_color} prefix="To:" />
         ) : (

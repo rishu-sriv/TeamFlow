@@ -10,7 +10,7 @@ export default function ProjectCard({ project }) {
   return (
     <Link
       to={`/projects/${project.id}`}
-      className="block bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:shadow-lg hover:-translate-y-0.5 transition-all group"
+      className="block bg-white dark:bg-jet-elevated rounded-2xl p-6 border border-slate-100 dark:border-jet-border hover:shadow-lg hover:-translate-y-0.5 transition-all group"
     >
       <div className="flex items-start justify-between mb-3">
         <div className="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold text-sm">

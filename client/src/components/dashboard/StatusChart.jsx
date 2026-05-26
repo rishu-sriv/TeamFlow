@@ -25,7 +25,7 @@ export default function StatusChart({ byStatus = {} }) {
 
   if (data.length === 0) {
     return (
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700">
+      <div className="bg-white dark:bg-jet-elevated rounded-2xl p-6 border border-slate-100 dark:border-jet-border">
         <h3 className="text-base font-semibold text-slate-800 dark:text-white mb-4">Task Distribution</h3>
         <div className="flex items-center justify-center h-48 text-slate-400 dark:text-slate-500 text-sm">
           No tasks yet
@@ -35,7 +35,7 @@ export default function StatusChart({ byStatus = {} }) {
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700">
+    <div className="bg-white dark:bg-jet-elevated rounded-2xl p-6 border border-slate-100 dark:border-jet-border">
       <h3 className="text-base font-semibold text-slate-800 dark:text-white mb-4">Task Distribution</h3>
       <ResponsiveContainer width="100%" height={220}>
         <PieChart>

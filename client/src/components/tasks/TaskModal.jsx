@@ -89,9 +89,9 @@ export default function TaskModal({ task: initialTask, projectRole, members = []
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-        <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+        <div className="relative bg-white dark:bg-jet-elevated rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-700">
+          <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-jet-border">
             <div className="flex items-center gap-2">
               <StatusBadge status={task.status} />
               <PriorityBadge priority={task.priority} />
@@ -130,7 +130,7 @@ export default function TaskModal({ task: initialTask, projectRole, members = []
           </div>
 
           {/* Tabs */}
-          <div className="flex border-b border-slate-100 dark:border-slate-700 px-6">
+          <div className="flex border-b border-slate-100 dark:border-jet-border px-6">
             {['details', 'history'].map((tab) => (
               <button
                 key={tab}
@@ -211,7 +211,7 @@ export default function TaskModal({ task: initialTask, projectRole, members = []
                         <select
                           value={form.assignee_id}
                           onChange={(e) => setForm({ ...form, assignee_id: e.target.value })}
-                          className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                         >
                           <option value="">Unassigned</option>
                           {members.map((m) => (
@@ -236,7 +236,7 @@ export default function TaskModal({ task: initialTask, projectRole, members = []
                           type="date"
                           value={form.due_date}
                           onChange={(e) => setForm({ ...form, due_date: e.target.value })}
-                          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                         />
                       ) : task.due_date ? (
                         <span className={`text-sm ${task.is_overdue ? 'text-red-500' : 'text-slate-700 dark:text-slate-200'}`}>
@@ -257,7 +257,7 @@ export default function TaskModal({ task: initialTask, projectRole, members = []
                       rows={4}
                       value={form.description}
                       onChange={(e) => setForm({ ...form, description: e.target.value })}
-                      className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
+                      className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
                     />
                   ) : (
                     <p className="text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap">
@@ -266,7 +266,7 @@ export default function TaskModal({ task: initialTask, projectRole, members = []
                   )}
                 </div>
 
-                <div className="text-xs text-slate-400 dark:text-slate-500 space-y-1 pt-2 border-t border-slate-100 dark:border-slate-700">
+                <div className="text-xs text-slate-400 dark:text-slate-500 space-y-1 pt-2 border-t border-slate-100 dark:border-jet-border">
                   {task.created_by_name && <p>Created by {task.created_by_name}</p>}
                   <p>Last updated {timeAgo(task.updated_at)}</p>
                 </div>
@@ -292,7 +292,7 @@ export default function TaskModal({ task: initialTask, projectRole, members = []
                 ) : (
                   <div className="space-y-3">
                     {taskHistory.map((h) => (
-                      <div key={h.id} className="flex items-start gap-3 bg-slate-50 dark:bg-slate-900 rounded-xl p-3">
+                      <div key={h.id} className="flex items-start gap-3 bg-slate-50 dark:bg-jet-card rounded-xl p-3">
                         <Avatar name={h.changed_by_name || '?'} color={h.changed_by_avatar_color || '#6366f1'} size="xs" />
                         <div>
                           <p className="text-sm text-slate-700 dark:text-slate-200">
@@ -313,12 +313,12 @@ export default function TaskModal({ task: initialTask, projectRole, members = []
 
           {/* Footer with save button */}
           {(editing || activeTab === 'details') && (
-            <div className="p-4 border-t border-slate-100 dark:border-slate-700 flex justify-end gap-3">
+            <div className="p-4 border-t border-slate-100 dark:border-jet-border flex justify-end gap-3">
               {editing ? (
                 <>
                   <button
                     onClick={() => { setEditing(false); setForm({ title: task.title, description: task.description || '', assignee_id: task.assignee_id || '', priority: task.priority, due_date: task.due_date ? task.due_date.split('T')[0] : '', status: task.status }) }}
-                    className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 font-medium text-sm transition-colors"
+                    className="px-4 py-2 rounded-xl border border-slate-200 dark:border-jet-border text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 font-medium text-sm transition-colors"
                   >
                     Cancel
                   </button>

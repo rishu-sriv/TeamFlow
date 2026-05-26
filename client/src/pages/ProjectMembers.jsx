@@ -82,10 +82,10 @@ export default function ProjectMembers() {
       </div>
 
       {/* Members table — desktop */}
-      <div className="hidden md:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+      <div className="hidden md:block bg-white dark:bg-jet-card rounded-2xl border border-slate-200 dark:border-jet-border overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+            <tr className="border-b border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-elevated/70">
               <th className="text-left px-5 py-3 font-semibold text-slate-600 dark:text-slate-300">Member</th>
               <th className="text-left px-5 py-3 font-semibold text-slate-600 dark:text-slate-300">Role</th>
               {isAdmin && (
@@ -99,7 +99,7 @@ export default function ProjectMembers() {
               return (
                 <tr
                   key={member.user_id}
-                  className={`border-b last:border-0 border-slate-100 dark:border-slate-800 ${
+                  className={`border-b last:border-0 border-slate-100 dark:border-jet-border ${
                     isSelf ? 'bg-indigo-50/60 dark:bg-indigo-900/10' : ''
                   }`}
                 >
@@ -127,7 +127,7 @@ export default function ProjectMembers() {
                           <button
                             onClick={() => handleRoleToggle(member)}
                             disabled={updatingRoleId === member.user_id}
-                            className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
+                            className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-jet-border text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-jet-elevated transition-colors disabled:opacity-50"
                           >
                             {updatingRoleId === member.user_id
                               ? 'Updating...'
@@ -153,7 +153,7 @@ export default function ProjectMembers() {
           return (
             <div
               key={member.user_id}
-              className={`bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 ${
+              className={`bg-white dark:bg-jet-card rounded-2xl border border-slate-200 dark:border-jet-border p-4 ${
                 isSelf ? 'bg-indigo-50/60 dark:bg-indigo-900/10' : ''
               }`}
             >
@@ -173,11 +173,11 @@ export default function ProjectMembers() {
                 <RoleBadge role={member.role} />
               </div>
               {isAdmin && !isSelf && (
-                <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+                <div className="mt-3 pt-3 border-t border-slate-100 dark:border-jet-border">
                   <button
                     onClick={() => handleRoleToggle(member)}
                     disabled={updatingRoleId === member.user_id}
-                    className="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
+                    className="w-full px-3 py-1.5 rounded-lg border border-slate-200 dark:border-jet-border text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-jet-elevated transition-colors disabled:opacity-50"
                   >
                     {updatingRoleId === member.user_id
                       ? 'Updating...'

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 
-// Apply stored dark mode preference before render
+// Apply stored dark mode preference before render (default: light)
 const theme = localStorage.getItem('teamflow-theme')
-if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+if (theme === 'dark') {
   document.documentElement.classList.add('dark')
 }
 

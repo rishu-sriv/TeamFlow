@@ -26,7 +26,7 @@ const actionConfig = {
   member_added:        { icon: UserPlus,    color: 'bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400' },
   member_removed:      { icon: UserMinus,   color: 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400' },
   member_role_changed: { icon: Shield,      color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' },
-  project_updated:     { icon: Settings,    color: 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400' },
+  project_updated:     { icon: Settings,    color: 'bg-gray-100 text-gray-600 dark:bg-jet-elevated dark:text-gray-400' },
   project_created:     { icon: FolderPlus,  color: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' },
 }
 
@@ -161,7 +161,7 @@ export default function ActivityLog() {
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
               {formatGroupLabel(dateKey)}
             </span>
-            <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
+            <div className="flex-1 h-px bg-slate-200 dark:bg-jet-elevated" />
           </div>
 
           {/* Entries */}
@@ -169,7 +169,7 @@ export default function ActivityLog() {
             {grouped[dateKey].map((entry) => {
               const config = actionConfig[entry.action] || {
                 icon: Settings,
-                color: 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400',
+                color: 'bg-slate-100 text-slate-500 dark:bg-jet-elevated dark:text-slate-400',
               }
               const IconComponent = config.icon
 

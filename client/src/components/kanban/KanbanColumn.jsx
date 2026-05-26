@@ -12,7 +12,7 @@ export default function KanbanColumn({ status, tasks, onTaskClick }) {
       <div className="flex items-center gap-2.5 mb-3 px-1">
         <span className={`w-2 h-2 rounded-full ${config.dot}`} />
         <h3 className="font-semibold text-sm text-slate-700 dark:text-slate-200">{config.label}</h3>
-        <span className="ml-auto bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-medium px-2 py-0.5 rounded-full">
+        <span className="ml-auto bg-slate-100 dark:bg-jet-elevated text-slate-500 dark:text-slate-400 text-xs font-medium px-2 py-0.5 rounded-full">
           {tasks.length}
         </span>
       </div>
@@ -22,7 +22,7 @@ export default function KanbanColumn({ status, tasks, onTaskClick }) {
         className={`flex-1 min-h-[200px] rounded-2xl p-2 space-y-2 transition-colors ${
           isOver
             ? 'bg-primary-50 dark:bg-primary-900/20 ring-2 ring-primary-300 dark:ring-primary-700'
-            : 'bg-slate-100 dark:bg-slate-900/50'
+            : 'bg-slate-100 dark:bg-jet-card/60'
         }`}
       >
         <SortableContext items={tasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>

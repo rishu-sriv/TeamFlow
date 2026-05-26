@@ -4,6 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
+        jet: {
+          DEFAULT: '#0a0a0a',
+          card: '#141414',
+          elevated: '#1e1e1e',
+          border: '#262626',
+        },
         primary: {
           50: '#eef2ff',
           100: '#e0e7ff',
