@@ -42,7 +42,7 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-lg p-6">
+      <div className="relative bg-white dark:bg-jet-elevated rounded-2xl shadow-2xl w-full max-w-lg p-6">
         <h2 className="text-lg font-bold text-slate-800 dark:text-white mb-5">New Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -52,7 +52,7 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="What needs to be done?"
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
             />
           </div>
           <div>
@@ -62,7 +62,7 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               placeholder="Add details..."
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm resize-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm resize-none"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -71,7 +71,7 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
               <select
                 value={form.priority}
                 onChange={(e) => setForm({ ...form, priority: e.target.value })}
-                className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -84,7 +84,7 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
               <select
                 value={form.assignee_id}
                 onChange={(e) => setForm({ ...form, assignee_id: e.target.value })}
-                className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
                 <option value="">Unassigned</option>
                 {members.map((m) => (
@@ -99,11 +99,11 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
               type="date"
               value={form.due_date}
               onChange={(e) => setForm({ ...form, due_date: e.target.value })}
-              className="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
           </div>
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose} className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 font-medium text-sm transition-colors">
+            <button type="button" onClick={onClose} className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 dark:border-jet-border text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 font-medium text-sm transition-colors">
               Cancel
             </button>
             <button type="submit" disabled={loading} className="flex-1 py-2.5 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium text-sm transition-colors disabled:opacity-60 flex items-center justify-center gap-2">
@@ -194,7 +194,7 @@ export default function ProjectBoard() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="px-6 pt-6 pb-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+      <div className="px-6 pt-6 pb-4 border-b border-slate-200 dark:border-jet-border bg-white dark:bg-jet-card">
         <div className="flex items-center gap-2 mb-3">
           <Link to="/projects" className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
             <ChevronLeft className="w-5 h-5" />
@@ -208,7 +208,7 @@ export default function ProjectBoard() {
             <select
               value={filters.priority}
               onChange={(e) => setFilters({ priority: e.target.value })}
-              className="text-xs px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none"
+              className="text-xs px-3 py-1.5 rounded-xl border border-slate-200 dark:border-jet-border bg-white dark:bg-jet-elevated text-slate-700 dark:text-slate-200 focus:outline-none"
             >
               <option value="">All Priorities</option>
               <option value="critical">Critical</option>
@@ -221,7 +221,7 @@ export default function ProjectBoard() {
             <select
               value={filters.assignee_id}
               onChange={(e) => setFilters({ assignee_id: e.target.value })}
-              className="text-xs px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none"
+              className="text-xs px-3 py-1.5 rounded-xl border border-slate-200 dark:border-jet-border bg-white dark:bg-jet-elevated text-slate-700 dark:text-slate-200 focus:outline-none"
             >
               <option value="">All Assignees</option>
               {members.map((m) => (
@@ -239,14 +239,14 @@ export default function ProjectBoard() {
           <div className="flex items-center gap-2">
             <Link
               to={`/projects/${id}/members`}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-medium transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-jet-border text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-jet-elevated text-xs font-medium transition-colors"
             >
               <Users className="w-3.5 h-3.5" />
               Members
             </Link>
             <Link
               to={`/projects/${id}/activity`}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-medium transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-jet-border text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-jet-elevated text-xs font-medium transition-colors"
             >
               <Activity className="w-3.5 h-3.5" />
               Activity

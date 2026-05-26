@@ -5,7 +5,7 @@ import { Activity } from 'lucide-react'
 export default function ActivityFeed({ activities = [] }) {
   if (activities.length === 0) {
     return (
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700">
+      <div className="bg-white dark:bg-jet-elevated rounded-2xl p-6 border border-slate-100 dark:border-jet-border">
         <h3 className="text-base font-semibold text-slate-800 dark:text-white mb-4">Recent Activity</h3>
         <div className="flex items-center justify-center h-32 text-slate-400 dark:text-slate-500 text-sm">
           No activity yet
@@ -15,7 +15,7 @@ export default function ActivityFeed({ activities = [] }) {
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700">
+    <div className="bg-white dark:bg-jet-elevated rounded-2xl p-6 border border-slate-100 dark:border-jet-border">
       <h3 className="text-base font-semibold text-slate-800 dark:text-white mb-4">Recent Activity</h3>
       <div className="space-y-4">
         {activities.map((a) => (

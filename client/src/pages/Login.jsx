@@ -69,7 +69,7 @@ export default function Login() {
       </div>
 
       {/* Right form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-white dark:bg-slate-950">
+      <div className="flex-1 flex items-center justify-center p-8 bg-white dark:bg-jet">
         <div className="w-full max-w-sm">
           <div className="lg:hidden flex items-center gap-2 mb-8">
             <div className="w-8 h-8 bg-primary-500 rounded-xl flex items-center justify-center">
@@ -97,7 +97,7 @@ export default function Login() {
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
               />
             </div>
 
@@ -111,7 +111,7 @@ export default function Login() {
                   value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
                   placeholder="••••••••"
-                  className="w-full px-4 py-3 pr-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
+                  className="w-full px-4 py-3 pr-11 rounded-xl border border-slate-200 dark:border-jet-border bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
                 />
                 <button
                   type="button"

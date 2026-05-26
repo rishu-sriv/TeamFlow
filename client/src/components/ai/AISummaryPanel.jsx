@@ -29,19 +29,19 @@ export default function AISummaryPanel({ projectId, isOpen, onClose }) {
 
       {/* Slide-in panel */}
       <div
-        className={`fixed top-0 right-0 h-full z-50 w-full sm:w-[380px] bg-white dark:bg-slate-900 shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full z-50 w-full sm:w-[380px] bg-white dark:bg-jet-card shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-slate-800">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-jet-border">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-violet-500" />
             <h2 className="text-base font-semibold text-slate-800 dark:text-white">AI Summary</h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-jet-elevated transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -122,7 +122,7 @@ export default function AISummaryPanel({ projectId, isOpen, onClose }) {
                   </span>
                 )}
                 {data.stats?.total !== undefined && (
-                  <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                  <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 dark:bg-jet-elevated text-slate-600 dark:text-slate-300">
                     {data.stats.total} tasks total
                   </span>
                 )}
@@ -172,7 +172,7 @@ export default function AISummaryPanel({ projectId, isOpen, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-center">
+        <div className="px-5 py-3 border-t border-slate-200 dark:border-jet-border flex items-center justify-center">
           <p className="text-xs text-slate-400 dark:text-slate-500">
             Powered by Gemini
           </p>

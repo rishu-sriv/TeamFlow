@@ -8,7 +8,7 @@ export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-[#F5F6FA] dark:bg-gray-950">
+    <div className="min-h-screen bg-[#F5F6FA] dark:bg-jet">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Content area — shifted right on desktop for the 72px sidebar */}

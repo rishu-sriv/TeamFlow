@@ -164,11 +164,11 @@ export default function Dashboard() {
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
             onClick={toggleDark}
-            className="w-9 h-9 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl flex items-center justify-center text-gray-500 hover:border-gray-300 transition-colors"
+            className="w-9 h-9 bg-white dark:bg-jet-elevated border border-gray-200 dark:border-jet-border rounded-xl flex items-center justify-center text-gray-500 hover:border-gray-300 transition-colors"
           >
             {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-          <button className="relative w-9 h-9 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl flex items-center justify-center text-gray-500 hover:border-gray-300 transition-colors">
+          <button className="relative w-9 h-9 bg-white dark:bg-jet-elevated border border-gray-200 dark:border-jet-border rounded-xl flex items-center justify-center text-gray-500 hover:border-gray-300 transition-colors">
             <Bell className="w-4 h-4" />
             {(stats.overdue || 0) > 0 && (
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />

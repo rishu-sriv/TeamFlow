@@ -8,7 +8,7 @@ export default function StatsCard({ label, value, icon: Icon, color, subtext }) 
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-jet-elevated rounded-2xl p-6 border border-slate-100 dark:border-jet-border hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <div className={`w-11 h-11 rounded-2xl flex items-center justify-center ${colorMap[color] || colorMap.indigo}`}>
           <Icon className="w-5 h-5" />

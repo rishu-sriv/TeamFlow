@@ -56,7 +56,7 @@ export default function Signup() {
   const set = (key) => (e) => setForm(f => ({ ...f, [key]: e.target.value }))
 
   const inputCls = (key) =>
-    `w-full px-4 py-3 rounded-xl border ${errors[key] ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm`
+    `w-full px-4 py-3 rounded-xl border ${errors[key] ? 'border-red-400' : 'border-slate-200 dark:border-jet-border'} bg-slate-50 dark:bg-jet-card text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm`
 
   return (
     <div className="min-h-screen flex">
@@ -87,7 +87,7 @@ export default function Signup() {
       </div>
 
       {/* Right form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-white dark:bg-slate-950">
+      <div className="flex-1 flex items-center justify-center p-8 bg-white dark:bg-jet">
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center gap-2 mb-8">
@@ -106,7 +106,7 @@ export default function Signup() {
               <div className="space-y-3">
                 <button
                   onClick={() => { setAction('create'); setStep(2) }}
-                  className="w-full flex items-start gap-4 p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 hover:border-primary-400 dark:hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/10 transition-all text-left group"
+                  className="w-full flex items-start gap-4 p-5 rounded-2xl border-2 border-slate-200 dark:border-jet-border hover:border-primary-400 dark:hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/10 transition-all text-left group"
                 >
                   <div className="w-10 h-10 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-200 dark:group-hover:bg-primary-800/40 transition-colors">
                     <Plus className="w-5 h-5 text-primary-600 dark:text-primary-400" />
@@ -119,7 +119,7 @@ export default function Signup() {
 
                 <button
                   onClick={() => { setAction('join'); setStep(2) }}
-                  className="w-full flex items-start gap-4 p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 hover:border-violet-400 dark:hover:border-violet-500 hover:bg-violet-50 dark:hover:bg-violet-900/10 transition-all text-left group"
+                  className="w-full flex items-start gap-4 p-5 rounded-2xl border-2 border-slate-200 dark:border-jet-border hover:border-violet-400 dark:hover:border-violet-500 hover:bg-violet-50 dark:hover:bg-violet-900/10 transition-all text-left group"
                 >
                   <div className="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center flex-shrink-0 group-hover:bg-violet-200 dark:group-hover:bg-violet-800/40 transition-colors">
                     <Users className="w-5 h-5 text-violet-600 dark:text-violet-400" />

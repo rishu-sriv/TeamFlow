@@ -26,14 +26,14 @@ export const getInitials = (name = '') => {
 }
 
 export const priorityConfig = {
-  low: { label: 'Low', color: 'text-slate-500', bg: 'bg-slate-100 dark:bg-slate-800', dot: 'bg-slate-400' },
+  low: { label: 'Low', color: 'text-slate-500', bg: 'bg-slate-100 dark:bg-jet-elevated', dot: 'bg-slate-400' },
   medium: { label: 'Medium', color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/30', dot: 'bg-blue-400' },
   high: { label: 'High', color: 'text-orange-600', bg: 'bg-orange-50 dark:bg-orange-900/30', dot: 'bg-orange-400' },
   critical: { label: 'Critical', color: 'text-red-600', bg: 'bg-red-50 dark:bg-red-900/30', dot: 'bg-red-500' },
 }
 
 export const statusConfig = {
-  todo: { label: 'Todo', color: 'text-slate-600', bg: 'bg-slate-100 dark:bg-slate-800', dot: 'bg-slate-400' },
+  todo: { label: 'Todo', color: 'text-slate-600', bg: 'bg-slate-100 dark:bg-jet-elevated', dot: 'bg-slate-400' },
   in_progress: { label: 'In Progress', color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/30', dot: 'bg-blue-500' },
   review: { label: 'Review', color: 'text-violet-600', bg: 'bg-violet-50 dark:bg-violet-900/30', dot: 'bg-violet-500' },
   done: { label: 'Done', color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-900/30', dot: 'bg-emerald-500' },

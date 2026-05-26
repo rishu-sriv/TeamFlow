@@ -20,7 +20,7 @@ export default function OverdueAlert({ tasks = [] }) {
       </div>
       <div className="space-y-2">
         {tasks.slice(0, 3).map((task) => (
-          <div key={task.id} className="flex items-center justify-between bg-white dark:bg-slate-800 rounded-xl px-3 py-2.5">
+          <div key={task.id} className="flex items-center justify-between bg-white dark:bg-jet-elevated rounded-xl px-3 py-2.5">
             <div>
               <p className="text-sm font-medium text-slate-800 dark:text-white line-clamp-1">{task.title}</p>
               <p className="text-xs text-slate-500 dark:text-slate-400">
